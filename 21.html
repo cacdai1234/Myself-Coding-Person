@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduce TGhuy Profile</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg, #ff6ec4, #7873f5, #4ade80, #facc15, #06b6d4, #f43f5e);
+      background-size: 800% 800%;
+      animation: bgColorShift 30s ease infinite;
+      overflow: hidden;
+    }
+
+    @keyframes bgColorShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Snow effect */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: white;
+      font-size: 1em;
+      user-select: none;
+      pointer-events: none;
+      z-index: 1001;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+
+    /* Loading Screen */
+    #loader {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      color: #fff;
+    }
+    .gradient-text {
+      font-size: 3rem;
+      font-weight: bold;
+      background: linear-gradient(90deg, #ff6ec4, #7873f5, #4ade80, #facc15);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientAnim 6s linear infinite;
+      margin-bottom: 1rem;
+    }
+    #loading-percentage {
+      font-size: 1.5rem;
+      animation: gradientAnim 10s linear infinite;
+      background: linear-gradient(90deg, #3b82f6, #22c55e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 300% 300%;
+    }
+    @keyframes gradientAnim {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Profile Content */
+    .profile {
+      display: none;
+      min-height: 100vh;
+      color: #fff;
+      padding: 4rem 2rem;
+      background: rgba(25, 25, 35, 0.6);
+      backdrop-filter: blur(25px);
+    }
+    .profile-inner {
+      max-width: 700px;
+      margin: auto;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+    .profile img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 3px solid rgba(255,255,255,0.3);
+    }
+    .profile h1, .profile p {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(270deg, #f97316, #10b981, #3b82f6, #ec4899, #06b6d4);
+      background-size: 600% 600%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientAnim 15s ease infinite;
+    }
+    .profile h1 {
+      font-size: 2.5rem;
+    }
+    .profile p {
+      font-size: 1.2rem;
+    }
+    .social {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .social a {
+      color: #fff;
+      font-size: 1.5rem;
+      transition: transform .3s;
+    }
+    .social a:hover {
+      transform: scale(1.2);
+    }
+
+    .languages {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .lang {
+      padding: .6rem 1.2rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 2px solid rgba(255,255,255,0.2);
+      background: linear-gradient(90deg, #22d3ee, #f472b6, #facc15, #10b981);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientAnim 8s ease-in-out infinite;
+    }
+
+    /* Credit */
+    .credit {
+      position: fixed;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 1rem;
+      background: linear-gradient(90deg, #facc15, #8b5cf6, #06b6d4, #f43f5e);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: scrollCredit 6s ease-in-out infinite, gradientAnim 10s linear infinite;
+    }
+
+    @keyframes scrollCredit {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(15px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Snowfall Container -->
+  <script>
+     function createSnowflake() {
+    const snow = document.createElement("div");
+    snow.className = "snowflake";
+    snow.style.left = Math.random() * 100 + "vw";
+    snow.style.animationDuration = (2 + Math.random() * 3) + "s"; // tốc độ rơi nhanh hơn
+    snow.style.fontSize = (Math.random() * 10 + 10) + "px"; // kích thước ngẫu nhiên
+    snow.style.opacity = Math.random() * 0.7 + 0.3; // độ trong suốt ngẫu nhiên
+    snow.innerHTML = "❄";
+    document.body.appendChild(snow);
+
+    // Xóa bông tuyết sau khi rơi xong để tránh đầy bộ nhớ
+    setTimeout(() => snow.remove(), 5000);
+  }
+
+  // Tạo tuyết ban đầu
+  for (let i = 0; i < 250; i++) {
+    createSnowflake();
+  }
+
+  // Liên tục tạo thêm tuyết mỗi 100ms
+  setInterval(createSnowflake, 80);
+  </script>
+
+  <!-- Loader -->
+  <div id="loader">
+    <div class="gradient-text">Loading Profile...</div>
+    <div id="loading-percentage">0%</div>
+  </div>
+
+  <!-- Profile Content -->
+  <div class="profile" id="profile">
+    <div class="profile-inner">
+      <img src="https://i.postimg.cc/g0CXWsJ0/image-7-1-1.png" alt="Avatar" />
+      <h1>Tran Gia Huy</h1>
+      <p>Developer | Cybersecurity Enthusiast | Coder</p>
+      <div class="social">
+        <a href="https://www.facebook.com/trasuaroblox" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.tiktok.com/@traidep16t" target="_blank"><i class="fab fa-tiktok"></i></a>
+        <a href="https://t.me/DITMENHACAISUNWIN" target="_blank"><i class="fab fa-telegram"></i></a>
+        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+      <div class="languages">
+        <span class="lang">HTML</span>
+        <span class="lang">CSS</span>
+        <span class="lang">Python</span>
+        <span class="lang">C</span>
+        <span class="lang">C++</span>
+        <span class="lang">C#</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="credit">© 2025 Created by Tran Gia Huy</div>
+
+  <script>
+    // Simulate loading progress (8s ~ 50ms * 100)
+    let percent = 0;
+    const loaderInterval = setInterval(() => {
+      percent += 1;
+      document.getElementById('loading-percentage').innerText = percent + '%';
+      if (percent >= 100) {
+        clearInterval(loaderInterval);
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('profile').style.display = 'block';
+      }
+    }, 50);
+  </script>
+</body>
+</html>

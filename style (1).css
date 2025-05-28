@@ -1,0 +1,170 @@
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(-45deg, #ff6ec4, #7873f5, #4ade80, #facc15, #06b6d4, #f43f5e);
+  background-size: 800% 800%;
+  animation: bgColorShift 30s ease infinite;
+}
+
+@keyframes bgColorShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Loading Screen */
+#loader {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  color: #fff;
+}
+.gradient-text {
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff6ec4, #7873f5, #4ade80, #facc15);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnim 6s linear infinite;
+  margin-bottom: 1rem;
+}
+#loading-percentage {
+  font-size: 1.5rem;
+  animation: gradientAnim 10s linear infinite;
+  background: linear-gradient(90deg, #3b82f6, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 300% 300%;
+}
+
+@keyframes gradientAnim {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Profile Content */
+.profile {
+  display: none;
+  min-height: 100vh;
+  color: #fff;
+  padding: 4rem 2rem;
+  background: rgba(25, 25, 35, 0.6);
+  backdrop-filter: blur(25px);
+}
+.profile-inner {
+  max-width: 700px;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.profile img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.3);
+}
+.profile h1, .profile p {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(270deg, #f97316, #10b981, #3b82f6, #ec4899, #06b6d4);
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnim 15s ease infinite;
+}
+.profile h1 { font-size: 2.5rem; }
+.profile p { font-size: 1.2rem; }
+
+.social {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.social a {
+  color: #fff;
+  font-size: 1.5rem;
+  transition: transform .3s;
+}
+.social a:hover {
+  transform: scale(1.2);
+}
+
+.languages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.lang {
+  padding: .6rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1rem;
+  border: 2px solid rgba(255,255,255,0.2);
+  background: linear-gradient(90deg, #22d3ee, #f472b6, #facc15, #10b981);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnim 8s ease-in-out infinite;
+}
+
+/* Credit */
+.credit {
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  background: linear-gradient(90deg, #facc15, #8b5cf6, #06b6d4, #f43f5e);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: scrollCredit 6s ease-in-out infinite, gradientAnim 10s linear infinite;
+}
+
+@keyframes scrollCredit {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(15px); }
+  100% { transform: translateX(0); }
+}
+
+/* Snowflakes */
+.snowflakes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  overflow: hidden;
+}
+.snowflake {
+  position: absolute;
+  top: -10px;
+  color: white;
+  font-size: 1.5rem;
+  user-select: none;
+  animation: fall linear infinite;
+  opacity: 0.7;
+}
+@keyframes fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+.snowflake:nth-child(1) { left: 10%; animation-duration: 10s; animation-delay: 0s; }
+.snowflake:nth-child(2) { left: 20%; animation-duration: 12s; animation-delay: 2s; }
+.snowflake:nth-child(3) { left: 30%; animation-duration: 8s; animation-delay: 4s; }
+.snowflake:nth-child(4) { left: 50%; animation-duration: 14s; animation-delay: 1s; }
+.snowflake:nth-child(5) { left: 70%; animation-duration: 10s; animation-delay: 3s; }
+.snowflake:nth-child(6) { left: 90%; animation-duration: 11s; animation-delay: 5s; }
